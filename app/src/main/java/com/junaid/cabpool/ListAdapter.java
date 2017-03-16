@@ -1,6 +1,7 @@
 package com.junaid.cabpool;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -63,6 +64,7 @@ import java.util.HashMap;
 
         this.callingClass = mClass;
         this.mContext = context;
+
     }
 
 
@@ -89,7 +91,7 @@ import java.util.HashMap;
         holder.mDescription.setText(cab.getDescription());
         holder.mName.setText(MainActivity.mOrganizerName);
 
-        Log.d("ListTokens",cab.getId() + " " + mList.get(position).getId());
+       // Log.d("ListTokens",cab.getId() + " " + mList.get(position).getId());
 
         holder.mOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +112,10 @@ import java.util.HashMap;
 
 
 
-    private void createMyCabsMenu(View v, final int position){
+    private void createMyCabsMenu(final View v, final int position){
+
+        final DBHelper db = new DBHelper(v.getContext());
+
 
         PopupMenu popupMenu = new PopupMenu(mContext,v);
         popupMenu.inflate(R.menu.my_cabs_options_menu);
@@ -119,13 +124,16 @@ import java.util.HashMap;
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.edit_menu_item:
-                        //handle menu1 click
+                        Intent i = new Intent(v.getContext(),CabData.class);
+                        i.putExtra("Edit_data",mList.get(position));
+                        v.getContext().startActivity(i);
                         break;
                     case R.id.delete_menu_item:
                         Cab cab = mList.get(position);
                         //Log.d("Click",position+" "+mList.get(position).getId() + " "+cab.getDescription());
-                        //mDatabase.child(cab.getId()).removeValue();
-                        //notifyDataSetChanged();
+                        mDatabase.child("cabs").child(cab.getId()).removeValue();
+                        db.deleteID(cab.getId());
+                        notifyDataSetChanged();
                         break;
 
                 }

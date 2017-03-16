@@ -86,14 +86,14 @@ public class MyCabs extends Fragment {
 
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     Cab cab = noteDataSnapshot.getValue(Cab.class);
-                    Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue().toString());
+                   // Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue().toString());
                     if(db.findID(cab.getId()))
                         dataList.add(cab);
 
                 }
 
 
-                Log.d("List",dataList.toString());
+               // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
             }
 

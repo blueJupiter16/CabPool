@@ -1,5 +1,6 @@
 package com.junaid.cabpool;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.sql.Time;
@@ -10,7 +11,7 @@ import java.util.UUID;
  * Created by Junaid on 27-02-2017.
  */
 
-public class Cab {
+public class Cab implements Serializable {
 
     private String mOrganizerName;
     private String mDestination;
