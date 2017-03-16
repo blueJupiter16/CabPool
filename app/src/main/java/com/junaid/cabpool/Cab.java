@@ -25,7 +25,7 @@ public class Cab {
 
 
     public Cab() {
-        mId = UUID.randomUUID().toString();
+
     }
 
     public Cab(String organizerName, String destination, String date, String time, String email,
@@ -83,7 +83,7 @@ public class Cab {
         mOrganizerName = organizerName;
 
     }
-    public void setId(String ID){}
+    public void setId(String ID){mId = ID;}
 
     public void setDestination(String destination) {
         mDestination = destination;

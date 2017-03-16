@@ -88,7 +88,7 @@ public class AvailableCabs extends Fragment {
         mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.add_cab_FAB);
         mFloatingActionButton.setVisibility(FloatingActionButton.GONE);
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.child("cabs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //ArrayList<Cab> cabs = new ArrayList<>();

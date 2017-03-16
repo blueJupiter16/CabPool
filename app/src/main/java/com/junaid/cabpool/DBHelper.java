@@ -18,7 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "cabIds";
     private static final String COLUMN_ID = "id";
 
-    private static int DATABSE_VERSION = 15;
+    private static int DATABSE_VERSION = 20;
 
 
     public DBHelper(Context context) {

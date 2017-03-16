@@ -50,8 +50,9 @@ public class CabData extends AppCompatActivity {
                 cab.setTime(mTime.getText().toString());
                 cab.setDestination(mDestination.getText().toString());
                 cab.setDate(mDate.getText().toString());
+                cab.setId(mDatabase.child("cabs").push().getKey());
 
-                mDatabase.child(cab.getId()).setValue(cab);
+                mDatabase.child("cabs").child(cab.getId()).setValue(cab);
                 finish();
 
                DBHelper db = new DBHelper(getApplicationContext());

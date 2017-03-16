@@ -78,7 +78,7 @@ public class MyCabs extends Fragment {
         });
 
 
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        mDatabase.child("cabs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //ArrayList<Cab> cabs = new ArrayList<>();
@@ -86,7 +86,7 @@ public class MyCabs extends Fragment {
 
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     Cab cab = noteDataSnapshot.getValue(Cab.class);
-                    Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue(Cab.class).getId());
+                    Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue().toString());
                     if(db.findID(cab.getId()))
                         dataList.add(cab);
 
