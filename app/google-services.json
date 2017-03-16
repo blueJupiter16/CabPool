@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "651028023307",
+    "firebase_url": "https://cabpool-71d69.firebaseio.com",
+    "project_id": "cabpool-71d69",
+    "storage_bucket": "cabpool-71d69.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651028023307:android:c7dba586b23bdd95",
+        "android_client_info": {
+          "package_name": "com.junaid.cabpool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "651028023307-ph76qep58i49ecgr3afbo6jtc40g844g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.junaid.cabpool",
+            "certificate_hash": "6a9b9cede9c2ca6a4b12851a70821b4107962daf"
+          }
+        },
+        {
+          "client_id": "651028023307-2dcm0nbjtj222kinkifotdssq3214sfh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPEr4zYwUwI_4E2Qgo6Wc6BBLCOOmMHHQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "651028023307-2dcm0nbjtj222kinkifotdssq3214sfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
