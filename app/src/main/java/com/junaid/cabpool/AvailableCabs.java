@@ -1,6 +1,7 @@
 package com.junaid.cabpool;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import net.bohush.geometricprogressview.GeometricProgressView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,7 +43,7 @@ public class AvailableCabs extends Fragment {
     private FloatingActionButton mFloatingActionButton;
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-
+    private GeometricProgressView mGeometricProgressView;
 
 
     public AvailableCabs(){
@@ -80,7 +83,8 @@ public class AvailableCabs extends Fragment {
         dataList.add(cab);*/
 
 
-
+        mGeometricProgressView = (GeometricProgressView) view.findViewById(R.id.progressView);
+        mGeometricProgressView.setVisibility(View.GONE);
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.avialable_cabs_list_view);
@@ -102,9 +106,16 @@ public class AvailableCabs extends Fragment {
                    // cab.setId();
                    // Log.d("AvailableCabsID",cab.getId()+ " " + noteDataSnapshot.getValue(Cab.class).getId());
                     dataList.add(cab);
+
+                    mGeometricProgressView.setVisibility(View.VISIBLE);
+                    mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
+                    mGeometricProgressView.setNumberOfAngles(3);
+                    mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
+                    mGeometricProgressView.setDuration(1000);
+                    mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
                 }
 
-
+                mGeometricProgressView.setVisibility(View.GONE);
                // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
             }

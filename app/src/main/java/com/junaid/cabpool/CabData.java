@@ -71,7 +71,7 @@ public class CabData extends AppCompatActivity {
     private void saveCabState(){
         if(editableCab == null) {
             saveCab();
-            Log.d("check",editableCab.getId());
+//            Log.d("check",editableCab.getId());
         }
         else {
             editCab(editableCab);

@@ -1,6 +1,7 @@
 package com.junaid.cabpool;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import net.bohush.geometricprogressview.GeometricProgressView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,6 +38,7 @@ public class MyCabs extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
     private FloatingActionButton mFloatingActionButton;
+    private GeometricProgressView mGeometricProgressView;
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
     private DBHelper db;
@@ -61,11 +65,16 @@ public class MyCabs extends Fragment {
        // dataList.add(cab);
 
 
+       // progressView.setVisibility(GeometricProgressView.GONE);
+
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.avialable_cabs_list_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new ListAdapter(dataList,this.getClass(),getContext());
         mRecyclerView.setAdapter(mAdapter);
+        mGeometricProgressView = (GeometricProgressView) view.findViewById(R.id.progressView);
+        mGeometricProgressView.setVisibility(View.GONE);
 
         mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.add_cab_FAB);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -89,12 +98,23 @@ public class MyCabs extends Fragment {
                    // Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue().toString());
                     if(db.findID(cab.getId()))
                         dataList.add(cab);
+                    mGeometricProgressView.setVisibility(View.VISIBLE);
+                    mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
+                    mGeometricProgressView.setNumberOfAngles(3);
+                    mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
+                    mGeometricProgressView.setDuration(1000);
+                    mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
+
 
                 }
+
+                mGeometricProgressView.setVisibility(View.GONE);
 
 
                // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override
