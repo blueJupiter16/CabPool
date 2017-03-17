@@ -2,12 +2,14 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
 
     tools:context="com.junaid.cabpool.MainActivity">
+
 
 
 
@@ -18,7 +20,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-
+        app:tabGravity="fill"
+        android:elevation="8dp"
+        app:tabMode="fixed"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <!-- View pager to swipe views -->
@@ -28,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:elevation="8dp"/>
+
 
 
 

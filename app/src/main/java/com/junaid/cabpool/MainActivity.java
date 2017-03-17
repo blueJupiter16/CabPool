@@ -1,6 +1,9 @@
 package com.junaid.cabpool;
 
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,9 +42,27 @@ public class MainActivity extends AppCompatActivity {
         //Creating our pager adapter
         Pager adapter = new Pager(getSupportFragmentManager(), mTabLayout.getTabCount());
 
+
         //Adding adapter to pager
         mViewPager.setAdapter(adapter);
         mViewPager.getCurrentItem();
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mTabLayout.getTabAt(position).select();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
 
         //Adding onTabSelectedListener to swipe views
         mTabLayout.setOnTabSelectedListener(new Listener());
@@ -53,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         public void onTabSelected(TabLayout.Tab tab) {
             mViewPager.setCurrentItem(tab.getPosition());
 
+
         }
 
         @Override
@@ -63,6 +85,39 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onTabReselected(TabLayout.Tab tab) {
 
+        }
+    }
+
+   private class Pager extends FragmentStatePagerAdapter {
+
+        private int mTabCount;
+
+        public Pager(FragmentManager fm, int tabCount) {
+            super(fm);
+            this.mTabCount = tabCount;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+
+            switch (position){
+                case 0:
+                    AvailableCabs tab1 = new AvailableCabs();
+
+                    return tab1;
+                case 1:
+                    MyCabs tab2 = new MyCabs();
+
+                    return tab2;
+                default:
+                    return null;
+            }
+
+        }
+
+        @Override
+        public int getCount() {
+            return mTabCount;
         }
     }
 }

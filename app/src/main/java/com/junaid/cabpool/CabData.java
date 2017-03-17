@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,20 +58,29 @@ public class CabData extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(editableCab == null) {
-                    saveCab();
-                    Log.d("check",editableCab.getId());
-                }
-                else {
-                    editCab(editableCab);
-                }
+                saveCabState();
 
-                //Log.d("Database",db.getAllContacts().toString());
-                Intent i = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(i);
             }
         });
 
+
+    }
+
+
+
+    private void saveCabState(){
+        if(editableCab == null) {
+            saveCab();
+            Log.d("check",editableCab.getId());
+        }
+        else {
+            editCab(editableCab);
+        }
+
+        //Log.d("Database",db.getAllContacts().toString());
+        Intent i = new Intent(getBaseContext(),MainActivity.class);
+        startActivity(i);
+        Toast.makeText(getBaseContext(),"Saved",Toast.LENGTH_SHORT).show();
 
     }
 
