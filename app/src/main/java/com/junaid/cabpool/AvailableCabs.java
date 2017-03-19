@@ -100,6 +100,7 @@ public class AvailableCabs extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //ArrayList<Cab> cabs = new ArrayList<>();
+                displayLoading();
                 dataList.clear();
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     Cab cab = noteDataSnapshot.getValue(Cab.class);
@@ -107,17 +108,13 @@ public class AvailableCabs extends Fragment {
                    // Log.d("AvailableCabsID",cab.getId()+ " " + noteDataSnapshot.getValue(Cab.class).getId());
                     dataList.add(cab);
 
-                    mGeometricProgressView.setVisibility(View.VISIBLE);
-                    mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
-                    mGeometricProgressView.setNumberOfAngles(3);
-                    mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
-                    mGeometricProgressView.setDuration(1000);
-                    mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
+
                 }
 
-                mGeometricProgressView.setVisibility(View.GONE);
+
                // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
+                disappearLoading();
             }
 
             @Override
@@ -128,4 +125,19 @@ public class AvailableCabs extends Fragment {
         });
 
     }
+
+    private void displayLoading(){
+
+        mGeometricProgressView.setVisibility(View.VISIBLE);
+        mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
+        mGeometricProgressView.setNumberOfAngles(3);
+        mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
+        mGeometricProgressView.setDuration(1000);
+        mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
+    }
+
+    private void disappearLoading(){
+        mGeometricProgressView.setVisibility(View.GONE);
+    }
+
 }

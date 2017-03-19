@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +36,9 @@ import java.util.HashMap;
     private Class callingClass;
     private Context mContext;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+    // Allows to remember the last item shown on screen
+    private int lastPosition = -1;
 
 
     /*------------------View Holder---------------*/
@@ -91,6 +96,8 @@ import java.util.HashMap;
         holder.mDescription.setText(cab.getDescription());
         holder.mName.setText(MainActivity.mOrganizerName);
 
+        setAnimation(holder.itemView,position);
+
        // Log.d("ListTokens",cab.getId() + " " + mList.get(position).getId());
 
         holder.mOptions.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +106,8 @@ import java.util.HashMap;
                  /*----------------Displaying Menu--------------*/
                 if(MyCabs.class == callingClass)
                     createMyCabsMenu(v,position);
+                else
+                    createAvailableCabsMenu(v,position);
             }
         });
 
@@ -110,6 +119,47 @@ import java.util.HashMap;
     @Override
     public int getItemCount() { return mList.size();  }
 
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
+
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
+
+    private void createAvailableCabsMenu(final View v,final int position){
+
+        PopupMenu popupMenu = new PopupMenu(mContext,v);
+        popupMenu.inflate(R.menu.available_cabs_options_menu);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.email_menu_item:
+                        Intent email = new Intent(Intent.ACTION_SEND);
+                        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ mList.get(position).getEmail() });
+                        email.putExtra(Intent.EXTRA_SUBJECT, "cabpool");
+
+
+                       //need this to prompts email client only
+                        email.setType("message/rfc822");
+
+                        mContext.startActivity(Intent.createChooser(email, "Choose an Email client :"));
+                        break;
+
+
+                }
+                return false;
+            }
+        });
+        //displaying the popup
+        popupMenu.show();
+
+    }
 
 
     private void createMyCabsMenu(final View v, final int position){
