@@ -45,27 +45,21 @@ public class MyCabs extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.available_cabs_fragment_layout,container,false);
+        mGeometricProgressView = (GeometricProgressView) v.findViewById(R.id.progressView);
+        mGeometricProgressView.setVisibility(View.GONE);
+        displayLoading();
 
-        return inflater.inflate(R.layout.available_cabs_fragment_layout,container,false);
+        return v;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         db = new DBHelper(getActivity());
-        /*Cab cab = new Cab();
-        cab.setDate("14-03-2017");
-        cab.setTime("5:00 PM");
-        cab.setDestination("NOIDA");
-        cab.setOrigin("SNU");
-        cab.setDescription("We have space for two people. reply ASAP");
-        cab.setOrganizerName("Junaid Tinwala");*/
 
-       // dataList.add(cab);
-
-
-       // progressView.setVisibility(GeometricProgressView.GONE);
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.avialable_cabs_list_view);
@@ -73,8 +67,7 @@ public class MyCabs extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new ListAdapter(dataList,this.getClass(),getContext());
         mRecyclerView.setAdapter(mAdapter);
-        mGeometricProgressView = (GeometricProgressView) view.findViewById(R.id.progressView);
-        mGeometricProgressView.setVisibility(View.GONE);
+
 
         mFloatingActionButton = (FloatingActionButton) view.findViewById(R.id.add_cab_FAB);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -98,21 +91,17 @@ public class MyCabs extends Fragment {
                    // Log.d("MyCabsId",cab.getId()+ " " + noteDataSnapshot.getValue().toString());
                     if(db.findID(cab.getId()))
                         dataList.add(cab);
-                    mGeometricProgressView.setVisibility(View.VISIBLE);
-                    mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
-                    mGeometricProgressView.setNumberOfAngles(3);
-                    mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
-                    mGeometricProgressView.setDuration(1000);
-                    mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
+
 
 
                 }
 
-                mGeometricProgressView.setVisibility(View.GONE);
+
 
 
                // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
+                disappearLoading();
 
 
             }
@@ -124,4 +113,22 @@ public class MyCabs extends Fragment {
 
         });
     }
+
+
+
+    private void displayLoading(){
+
+        mGeometricProgressView.setVisibility(View.VISIBLE);
+        mGeometricProgressView.setType(GeometricProgressView.TYPE.TRIANGLE);
+        mGeometricProgressView.setNumberOfAngles(3);
+        mGeometricProgressView.setColor(Color.parseColor("#3F51B5"));
+        mGeometricProgressView.setDuration(1000);
+        mGeometricProgressView.setFigurePadding(getResources().getDimensionPixelOffset(R.dimen.cardview_compat_inset_shadow));
+    }
+
+    private void disappearLoading(){
+        mGeometricProgressView.setVisibility(View.GONE);
+    }
+
 }
+

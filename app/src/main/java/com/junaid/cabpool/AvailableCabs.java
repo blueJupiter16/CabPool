@@ -1,5 +1,6 @@
 package com.junaid.cabpool;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.Time;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,39 +54,24 @@ public class AvailableCabs extends Fragment {
 
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.available_cabs_fragment_layout,container,false);;
+        mGeometricProgressView = (GeometricProgressView) v.findViewById(R.id.progressView);
+        mGeometricProgressView.setVisibility(View.GONE);
 
-        return inflater.inflate(R.layout.available_cabs_fragment_layout,container,false);
+        displayLoading();
+
+        return v;
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
-        /*
-        Cab cab = new Cab();
-        cab.setDate("14-03-2017");
-        cab.setTime("5:00 PM");
-        cab.setDestination("NOIDA");
-        cab.setOrigin("SNU");
-        cab.setDescription("We have space for two people. reply ASAP");
-        cab.setOrganizerName("Junaid Tinwala");
-        dataList.add(cab);
 
-        cab.setDate("14adasdas-03-2017");
-        cab.setTime("5:asdasdasd00 PM");
-        cab.setDestination("NOIDasdasdasA");
-        cab.setOrigin("SNU");
-        cab.setDescription("We have spadasdace for two people. reply ASAP");
-        cab.setOrganizerName("Junaidasdasdas Tinwala");
-        dataList.add(cab);*/
-
-
-        mGeometricProgressView = (GeometricProgressView) view.findViewById(R.id.progressView);
-        mGeometricProgressView.setVisibility(View.GONE);
 
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.avialable_cabs_list_view);
@@ -100,7 +87,7 @@ public class AvailableCabs extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //ArrayList<Cab> cabs = new ArrayList<>();
-                displayLoading();
+
                 dataList.clear();
                 for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
                     Cab cab = noteDataSnapshot.getValue(Cab.class);
@@ -115,6 +102,7 @@ public class AvailableCabs extends Fragment {
                // Log.d("List",dataList.toString());
                 mAdapter.notifyDataSetChanged();
                 disappearLoading();
+
             }
 
             @Override
@@ -125,6 +113,13 @@ public class AvailableCabs extends Fragment {
         });
 
     }
+
+    @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+    }
+
+
 
     private void displayLoading(){
 

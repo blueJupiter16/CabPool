@@ -1,83 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/colorPrimary"
+                android:id="@+id/form_card"
+                android:elevation="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    >
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/edit_origin"
+                        android:textSize="20sp"
+                        android:hint="From"
+                        android:textColorHint="#FFFFFFFF"
+                        android:backgroundTint="#FFFFFFFF"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="10dp"
+                        />
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:id="@+id/edit_destination"
+                        android:hint="To"
+                        android:textColorHint="#FFFFFFFF"
+                        android:backgroundTint="#FFFFFFFF"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="30dp"
+
+                        />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_below="@id/form_card"
+        android:layout_marginTop="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="From"
-            android:textSize="20dp"/>
-        <EditText
+
+    <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edit_origin"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="To"
-            android:textSize="20dp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:id="@+id/edit_destination"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="20dp"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/edit_date"
+            android:hint="Date"
+            android:backgroundTint="@color/colorPrimary"
+
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time"
-            android:textSize="20dp"
-            />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:id="@+id/edit_time"
+            android:hint="Time"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="20dp"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/edit_description"
-            android:textSize="20dp"
+            android:textSize="20sp"
+            android:hint="Description"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
             />
-        
+
 
     </LinearLayout>
 
-    <Button
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:id="@+id/save_data"
-        android:layout_alignParentBottom="true"/>
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/save_data"
+            android:backgroundTint="@color/colorPrimary"
+            android:textColor="#ffffff"
+
+            />
+    </LinearLayout>
 
 </RelativeLayout>
